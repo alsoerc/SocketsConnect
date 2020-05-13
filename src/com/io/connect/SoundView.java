@@ -13,21 +13,29 @@ import java.util.Observer;
  * @author alsorc
  */
 public class SoundView extends javax.swing.JInternalFrame implements Observer{
-
-    String iPSensorSonido = "192.168.1.77";
     
+    private final String iPSensorSonido = "192.168.1.77";
+    
+    private static Servidor myServer;
     /**
      * Creates new form LightView
      */
     public SoundView() {
         initComponents();
         loadStates();
-        Servidor s = new Servidor(5000);
+        Servidor s = getServidor();
         s.addObserver(this);
         Thread t = new Thread(s);
         t.start();
         
     }
+    
+    public static Servidor getServidor(){
+        if(myServer == null)
+            myServer = new Servidor(5000);
+        return myServer;
+    }
+    
 
     public void loadStates(){
         this.iconPresencia.setEnabled(false);
@@ -158,7 +166,6 @@ public class SoundView extends javax.swing.JInternalFrame implements Observer{
         Cliente c = new Cliente( 5000, mensaje.toUpperCase(), iPSensorSonido);
         Thread t = new Thread(c);
         t.start();
-       this.iconAlert.setEnabled(true);
     }//GEN-LAST:event_btnAnalizarActionPerformed
 
 

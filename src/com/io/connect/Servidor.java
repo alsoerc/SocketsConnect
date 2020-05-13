@@ -12,21 +12,29 @@ import java.util.logging.Logger;
 public class Servidor extends Observable implements Runnable {
 
     private int puerto;
-
+    
+    private  ServerSocket myServerSocket;
+    
     public Servidor(int puerto) {
         this.puerto = puerto;
+    }   
+    
+    public ServerSocket getServerSocketInstance() throws IOException{
+        if(myServerSocket == null)
+            myServerSocket = new ServerSocket(puerto);
+        return myServerSocket;
     }
 
     @Override
     public void run() {
-
+        
         ServerSocket servidor = null;
         Socket sc = null;
         DataInputStream in;
-
+        
         try {
             //Creamos el socket del servidor
-            servidor = new ServerSocket(puerto);
+            servidor = getServerSocketInstance();
             System.out.println("Servidor iniciado");
 
             //Siempre estara escuchando peticiones

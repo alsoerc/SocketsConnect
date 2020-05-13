@@ -55,6 +55,11 @@ public class Launcher extends javax.swing.JFrame {
         btnMainSonido.setToolTipText("Mostrar sensor de sonido");
         btnMainSonido.setMaximumSize(new java.awt.Dimension(132, 48));
         btnMainSonido.setMinimumSize(new java.awt.Dimension(132, 48));
+        btnMainSonido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMainSonidoActionPerformed(evt);
+            }
+        });
 
         btnMainPresencia.setBackground(new java.awt.Color(51, 102, 255));
         btnMainPresencia.setForeground(new java.awt.Color(0, 0, 0));
@@ -141,6 +146,12 @@ public class Launcher extends javax.swing.JFrame {
         jDesktopPane1.add(pv);
         pv.setVisible(true);
     }//GEN-LAST:event_btnMainPresenciaActionPerformed
+
+    private void btnMainSonidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMainSonidoActionPerformed
+        SoundView sv = new SoundView();
+        jDesktopPane1.add(sv);
+        sv.setVisible(true);
+    }//GEN-LAST:event_btnMainSonidoActionPerformed
 
     /**
      * @param args the command line arguments

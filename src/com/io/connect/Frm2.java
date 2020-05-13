@@ -111,20 +111,20 @@ public class Frm2 extends javax.swing.JFrame implements Observer {
         String status="";
         switch(msg){
             case "ON":
-                status = "ENCENDIDO\n";
+                status = "ENCENDIDO";
                 break;
             case "OFF":
-                status = "APAGADO\n";
+                status = "APAGADO";
                 break;
             case "ANALIZAR":
                 if(getRandomIntegerBetweenRange(0, 9) == 5){
-                    status = "ALERT\n";   
+                    status = "ALERT";   
                 }else{
-                    status = "CALM\n";   
+                    status = "CALM";   
                 }
                 break;
             default:
-                status = "TACO\n";
+                status = "ACCIÓN NO DEFINIDA";
         }
         Cliente c = new Cliente(5000, status, ipClienteLauncher);
         Thread t = new Thread(c);
