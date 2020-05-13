@@ -73,11 +73,15 @@ public class Frm1 extends javax.swing.JFrame implements Observer {
         
         this.txtTexto.append("@ USUARIO: " + mensaje + "\n");
 
-        Cliente c = new Cliente( 5000, mensaje.toUpperCase(), "192.168.1.72");
-        
+        Cliente c = new Cliente( 5000, mensaje.toUpperCase(), "25.33.135.9");
         Thread t = new Thread(c);
         t.start();
-
+        Cliente c2 = new Cliente( 5000, mensaje.toUpperCase(), "25.36.114.37");
+        Thread t2 = new Thread(c2);
+        t2.start();
+//        Cliente c3 = new Cliente( 5000, mensaje.toUpperCase(), "25.36.68.101");
+//        Thread t3 = new Thread(c3);
+//        t3.start();
 
     }//GEN-LAST:event_btnEnviarActionPerformed
 
@@ -126,7 +130,7 @@ public class Frm1 extends javax.swing.JFrame implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        this.txtTexto.append("1: "+(String) arg +"\n");
+        this.txtTexto.append((String) arg +"\n");
     }
 
 }

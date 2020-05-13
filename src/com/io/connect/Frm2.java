@@ -9,15 +9,14 @@ import java.util.Observable;
 import java.util.Observer;
 
 public class Frm2 extends javax.swing.JFrame implements Observer {
-    
+    String ipClienteLauncher = "192.168.1.70";
     public Frm2() {
         initComponents();
         this.setTitle("LOG SOUND SENSOR");
         Servidor s = new Servidor(5000);
         s.addObserver(this);
         Thread t = new Thread(s);
-        t.start();
-        
+        t.start(); 
     }
 
     /**
@@ -111,25 +110,32 @@ public class Frm2 extends javax.swing.JFrame implements Observer {
       public String evalueMessage(String msg){
         String status="";
         switch(msg){
-            case "STATUS":
-                status = "FUNCIONANDO\n";
-                break;
             case "ON":
                 status = "ENCENDIDO\n";
                 break;
             case "OFF":
                 status = "APAGADO\n";
                 break;
-            case "SOUND LEVEL":
-                status = "ALTO\n";
+            case "ANALIZAR":
+                if(getRandomIntegerBetweenRange(0, 9) == 5){
+                    status = "ALERT\n";   
+                }else{
+                    status = "CALM\n";   
+                }
                 break;
             default:
                 status = "TACO\n";
         }
-        Cliente c = new Cliente(5000, status,"192.168.1.70");
+        Cliente c = new Cliente(5000, status, ipClienteLauncher);
         Thread t = new Thread(c);
         t.start();
         return status;
     }
+    public static int getRandomIntegerBetweenRange(int min, int max){
+        int x = (int)(Math.random()*((max-min)+1))+min;
+        return x;
+    }  
+      
+      
     
 }
