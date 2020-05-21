@@ -13,16 +13,16 @@ import java.awt.Color;
  */
 public class Launcher extends javax.swing.JFrame {
 
-//    String url = "/icons/background.jpg";
-//    ImageIcon img;
- 
+     
     
     /**
      * Creates new form Launcher
      */
     public Launcher() {
         initComponents();
-        this.jDesktopPane1.setBackground(Color.WHITE);
+        this.setLocationRelativeTo(null);
+        this.getContentPane().setBackground(Color.magenta);
+        
     }
 
     /**
@@ -42,6 +42,7 @@ public class Launcher extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
+        setForeground(new java.awt.Color(255, 204, 51));
 
         jDesktopPane1.setBackground(new java.awt.Color(255, 255, 255));
         jDesktopPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -110,7 +111,7 @@ public class Launcher extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(btnMainLuz, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 436, Short.MAX_VALUE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 463, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -127,7 +128,7 @@ public class Launcher extends javax.swing.JFrame {
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnMainPresencia)
                     .addComponent(btnMainSonido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addContainerGap(107, Short.MAX_VALUE))
         );
 
         getContentPane().add(jDesktopPane1, java.awt.BorderLayout.CENTER);
@@ -149,10 +150,11 @@ public class Launcher extends javax.swing.JFrame {
 
     private void btnMainSonidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMainSonidoActionPerformed
         SoundView sv = new SoundView();
+        
         jDesktopPane1.add(sv);
         sv.setVisible(true);
     }//GEN-LAST:event_btnMainSonidoActionPerformed
-
+    
     /**
      * @param args the command line arguments
      */
@@ -182,8 +184,10 @@ public class Launcher extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
-                new Launcher().setVisible(true);
+                new Launcher(){}.setVisible(true);
+                System.out.println("INICIANDO");
             }
         });
     }

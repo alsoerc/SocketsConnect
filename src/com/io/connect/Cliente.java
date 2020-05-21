@@ -1,6 +1,5 @@
 package com.io.connect;
 
-import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
@@ -8,6 +7,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Cliente implements Runnable {
+    
     private String host;
     private int puerto;
     private String mensaje;
@@ -27,7 +27,7 @@ public class Cliente implements Runnable {
 
         try {
 
-            //Creo el socket para conectarme con el cliente
+            //Creo el socket para conectarme con el servidor
             Socket sc = new Socket(host, puerto);
 
             out = new DataOutputStream(sc.getOutputStream());

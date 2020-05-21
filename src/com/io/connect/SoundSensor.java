@@ -8,9 +8,11 @@ package com.io.connect;
 import java.util.Observable;
 import java.util.Observer;
 
-public class Frm2 extends javax.swing.JFrame implements Observer {
+public class SoundSensor extends javax.swing.JFrame implements Observer {
+    
     String ipClienteLauncher = "192.168.1.70";
-    public Frm2() {
+    
+    public SoundSensor() {
         initComponents();
         this.setTitle("LOG SOUND SENSOR");
         Servidor s = new Servidor(5000);
@@ -77,21 +79,23 @@ public class Frm2 extends javax.swing.JFrame implements Observer {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Frm2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SoundSensor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Frm2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SoundSensor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Frm2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SoundSensor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Frm2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SoundSensor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Frm2().setVisible(true);
+                new SoundSensor().setVisible(true);
             }
         });
     }
@@ -131,6 +135,7 @@ public class Frm2 extends javax.swing.JFrame implements Observer {
         t.start();
         return status;
     }
+      
     public static int getRandomIntegerBetweenRange(int min, int max){
         int x = (int)(Math.random()*((max-min)+1))+min;
         return x;

@@ -5,17 +5,38 @@
  */
 package com.io.connect;
 
+import java.util.Observable;
+import java.util.Observer;
+
+
+
 /**
  *
  * @author alsorc
  */
-public class LightView extends javax.swing.JInternalFrame {
+public class LightView extends javax.swing.JInternalFrame implements Observer{
+    
+    private final String iPSensorLuz = "25.33.135.9";
+    
+    private static Servidor myServer;
 
     /**
      * Creates new form LightView
      */
     public LightView() {
         initComponents();
+        loadStates();
+        Servidor serverLight = getServidor();
+        serverLight.addObserver(this);
+        Thread t = new Thread(serverLight);
+        t.start();
+        
+    }
+    
+      public static Servidor getServidor(){
+        if(myServer == null)
+            myServer = new Servidor(5000);
+        return myServer;
     }
 
     /**
@@ -37,7 +58,7 @@ public class LightView extends javax.swing.JInternalFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 51));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/light32.png"))); // NOI18N
-        jLabel1.setText("Luz");
+        jLabel1.setText("Módulo de Luz");
 
         btnEncenderLuz.setForeground(new java.awt.Color(0, 204, 0));
         btnEncenderLuz.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/on.png"))); // NOI18N
@@ -100,9 +121,19 @@ public class LightView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnApagarLuzActionPerformed
 
     private void btnEncenderLuzActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEncenderLuzActionPerformed
-        // TODO add your handling code here:
+        this.iconFoco.setEnabled(true);
+        this.btnApagarLuz.setEnabled(true);
+        String mensaje = "ON";
+        System.out.println("----Conectando a cliente---");
+        Cliente c = new Cliente( 5000, mensaje.toUpperCase(), iPSensorLuz);
+        Thread t = new Thread(c);
+        t.start();
     }//GEN-LAST:event_btnEncenderLuzActionPerformed
 
+       public void loadStates(){
+        this.iconFoco.setEnabled(false);
+        this.btnApagarLuz.setEnabled(false);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnApagarLuz;
@@ -110,4 +141,17 @@ public class LightView extends javax.swing.JInternalFrame {
     private javax.swing.JLabel iconFoco;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void update(Observable o, Object o1) {
+        switch((String)o1){
+            case "ENCENDIDO":
+                  this.iconFoco.setEnabled(true);
+                  System.out.println("ENCENDIDO");
+                  break;
+            default:
+                System.err.println("Respuesta no válida " + (String)o1);
+        }
+    
+    }
 }

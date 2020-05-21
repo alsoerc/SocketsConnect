@@ -14,7 +14,7 @@ import java.util.Observer;
  */
 public class SoundView extends javax.swing.JInternalFrame implements Observer{
     
-    private final String iPSensorSonido = "192.168.1.77";
+    private final String iPSensorSonido = "25.33.135.9";
     
     private static Servidor myServer;
     /**
@@ -27,7 +27,6 @@ public class SoundView extends javax.swing.JInternalFrame implements Observer{
         s.addObserver(this);
         Thread t = new Thread(s);
         t.start();
-        
     }
     
     public static Servidor getServidor(){
