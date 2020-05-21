@@ -14,7 +14,7 @@ import java.util.Observer;
  */
 public class SoundView extends javax.swing.JInternalFrame implements Observer{
     
-    private final String iPSensorSonido = "25.33.135.9";
+    private final String iPSensorSonido = "192.168.1.77";
     
     private static Servidor myServer;
     /**
@@ -179,6 +179,7 @@ public class SoundView extends javax.swing.JInternalFrame implements Observer{
 
     @Override
     public void update(Observable o, Object o1) {
+        System.out.println((String)o1);
         switch((String)o1){
             case "ALERT":
                 this.iconAlert.setEnabled(true);

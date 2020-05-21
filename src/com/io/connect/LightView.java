@@ -15,7 +15,7 @@ import java.util.Observer;
  */
 public class LightView extends javax.swing.JInternalFrame implements Observer{
     
-    private final String iPSensorLuz = "192.168.1.77";
+    private final String iPSensorLuz = "192.168.1.73";
     
     private static Servidor myServer;
 

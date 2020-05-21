@@ -14,7 +14,7 @@ import java.util.Observer;
  */
 public class PresenceView extends javax.swing.JInternalFrame  implements Observer{
     
-    private final String iPSensorSonido = "192.168.1.77";
+    private final String iPSensorPrecensia = "192.168.1.77";
     
     private static Servidor myServer;
 
@@ -144,19 +144,20 @@ public class PresenceView extends javax.swing.JInternalFrame  implements Observe
 
     private void btnApagarPresenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarPresenciaActionPerformed
         loadStates();
+        this.btnEncenderPresencia.setEnabled(true);
     }//GEN-LAST:event_btnApagarPresenciaActionPerformed
 
     private void btnEncenderPresenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEncenderPresenciaActionPerformed
         this.iconPresencia.setEnabled(true);
         this.btnAnalizarPresencia.setEnabled(true);
+        this.btnApagarPresencia.setEnabled(true);
         
     }//GEN-LAST:event_btnEncenderPresenciaActionPerformed
 
     private void btnAnalizarPresenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnalizarPresenciaActionPerformed
-        this.iconAlertPresencia.setEnabled(true);
         String mensaje = "ANALIZAR";
         System.out.println("----Conectando a cliente---");
-        Cliente c = new Cliente( 5000, mensaje.toUpperCase(), iPSensorSonido);
+        Cliente c = new Cliente( 5000, mensaje.toUpperCase(), iPSensorPrecensia);
         Thread t = new Thread(c);
         t.start();
     }//GEN-LAST:event_btnAnalizarPresenciaActionPerformed
@@ -165,6 +166,7 @@ public class PresenceView extends javax.swing.JInternalFrame  implements Observe
         this.iconPresencia.setEnabled(false);
         this.iconAlertPresencia.setEnabled(false);
         this.btnAnalizarPresencia.setEnabled(false);
+        this.btnApagarPresencia.setEnabled(false);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -178,13 +180,14 @@ public class PresenceView extends javax.swing.JInternalFrame  implements Observe
 
     @Override
     public void update(Observable o, Object o1) {
+        System.out.println((String)o1);
         switch((String)o1){
             case "ALERT":
-                this.iconPresencia.setEnabled(true);
+                this.iconAlertPresencia.setEnabled(true);
                 System.out.println("PRESENCIA DETECTADA");
                 break;
             case "CALM":
-                  this.iconPresencia.setEnabled(false);
+                  this.iconAlertPresencia.setEnabled(false);
                   System.out.println("NO PRESENCIA");
                   break;
             default:

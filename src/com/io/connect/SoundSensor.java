@@ -10,7 +10,7 @@ import java.util.Observer;
 
 public class SoundSensor extends javax.swing.JFrame implements Observer {
     
-    String ipClienteLauncher = "192.168.1.70";
+    String ipClienteLauncher = "192.168.1.77";
     
     public SoundSensor() {
         initComponents();
