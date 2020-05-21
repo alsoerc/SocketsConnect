@@ -182,7 +182,7 @@ public class SoundView extends javax.swing.JInternalFrame implements Observer{
         switch((String)o1){
             case "ALERT":
                 this.iconAlert.setEnabled(true);
-                System.out.println("PRESENCIA DETECTADA");
+                System.out.println("SONIDO DETECTADO");
                 break;
             case "CALM":
                   this.iconAlert.setEnabled(false);

@@ -1,6 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
+ * To change this license header, choose License Headers in Project Properties. * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 package com.io.connect;
@@ -16,7 +15,7 @@ import java.util.Observer;
  */
 public class LightView extends javax.swing.JInternalFrame implements Observer{
     
-    private final String iPSensorLuz = "25.33.135.9";
+    private final String iPSensorLuz = "192.168.1.77";
     
     private static Servidor myServer;
 
@@ -117,7 +116,7 @@ public class LightView extends javax.swing.JInternalFrame implements Observer{
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnApagarLuzActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarLuzActionPerformed
-        // TODO add your handling code here:
+        loadStates();
     }//GEN-LAST:event_btnApagarLuzActionPerformed
 
     private void btnEncenderLuzActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEncenderLuzActionPerformed

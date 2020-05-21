@@ -5,21 +5,36 @@
  */
 package com.io.connect;
 
+import java.util.Observable;
+import java.util.Observer;
+
 /**
  *
  * @author alsorc
  */
-public class PresenceView extends javax.swing.JInternalFrame {
+public class PresenceView extends javax.swing.JInternalFrame  implements Observer{
+    
+    private final String iPSensorSonido = "192.168.1.77";
+    
+    private static Servidor myServer;
 
     /**
      * Creates new form LightView
      */
     public PresenceView() {
         initComponents();
-        this.iconPresencia.setEnabled(false);
-        this.iconAlertPresencia.setEnabled(false);
-        this.btnAnalizarPresencia.setEnabled(false);
-        
+        loadStates();
+        Servidor s = getServidor();
+        s.addObserver(this);
+        Thread t = new Thread(s);
+        t.start();
+     
+    }
+    
+    public static Servidor getServidor(){
+        if(myServer == null)
+            myServer = new Servidor(5000);
+        return myServer;
     }
 
     /**
@@ -128,20 +143,29 @@ public class PresenceView extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnApagarPresenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarPresenciaActionPerformed
-        this.iconPresencia.setEnabled(false);
-        this.iconAlertPresencia.setEnabled(false);
-        this.btnAnalizarPresencia.setEnabled(false);
+        loadStates();
     }//GEN-LAST:event_btnApagarPresenciaActionPerformed
 
     private void btnEncenderPresenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEncenderPresenciaActionPerformed
         this.iconPresencia.setEnabled(true);
         this.btnAnalizarPresencia.setEnabled(true);
+        
     }//GEN-LAST:event_btnEncenderPresenciaActionPerformed
 
     private void btnAnalizarPresenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnalizarPresenciaActionPerformed
         this.iconAlertPresencia.setEnabled(true);
+        String mensaje = "ANALIZAR";
+        System.out.println("----Conectando a cliente---");
+        Cliente c = new Cliente( 5000, mensaje.toUpperCase(), iPSensorSonido);
+        Thread t = new Thread(c);
+        t.start();
     }//GEN-LAST:event_btnAnalizarPresenciaActionPerformed
 
+    public void loadStates(){
+        this.iconPresencia.setEnabled(false);
+        this.iconAlertPresencia.setEnabled(false);
+        this.btnAnalizarPresencia.setEnabled(false);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAnalizarPresencia;
@@ -151,4 +175,20 @@ public class PresenceView extends javax.swing.JInternalFrame {
     private javax.swing.JLabel iconPresencia;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void update(Observable o, Object o1) {
+        switch((String)o1){
+            case "ALERT":
+                this.iconPresencia.setEnabled(true);
+                System.out.println("PRESENCIA DETECTADA");
+                break;
+            case "CALM":
+                  this.iconPresencia.setEnabled(false);
+                  System.out.println("NO PRESENCIA");
+                  break;
+            default:
+                System.err.println("Respuesta no válida " + (String)o1);
+        }
+    }
 }
