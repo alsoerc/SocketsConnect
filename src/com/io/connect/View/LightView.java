@@ -6,6 +6,7 @@ package com.io.connect.View;
 
 import com.io.connect.Cliente;
 import com.io.connect.Servidor;
+import icons2.FondoLuz;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -20,11 +21,14 @@ public class LightView extends javax.swing.JInternalFrame implements Observer{
     private final String iPSensorLuz = "25.36.68.101";
     
     private static Servidor myServer;
+    
+    private static FondoLuz fondo = new FondoLuz();
 
     /**
      * Creates new form LightView
      */
     public LightView() {
+        this.setContentPane(fondo);
         initComponents();
         loadStates();
         Servidor serverLight = getServidor();
@@ -53,65 +57,92 @@ public class LightView extends javax.swing.JInternalFrame implements Observer{
         btnEncenderLuz = new javax.swing.JButton();
         btnApagarLuz = new javax.swing.JButton();
         iconFoco = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setClosable(true);
 
+        jLabel1.setBackground(new java.awt.Color(170, 219, 255));
         jLabel1.setForeground(new java.awt.Color(255, 255, 51));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/light32.png"))); // NOI18N
-        jLabel1.setText("Módulo de Luz");
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons2/luz.png"))); // NOI18N
 
+        btnEncenderLuz.setBackground(new java.awt.Color(170, 219, 255));
         btnEncenderLuz.setForeground(new java.awt.Color(0, 204, 0));
-        btnEncenderLuz.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/on.png"))); // NOI18N
-        btnEncenderLuz.setText("Encender");
+        btnEncenderLuz.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons2/on.png"))); // NOI18N
+        btnEncenderLuz.setBorderPainted(false);
         btnEncenderLuz.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEncenderLuzActionPerformed(evt);
             }
         });
 
-        btnApagarLuz.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/off.png"))); // NOI18N
-        btnApagarLuz.setText("Apagar");
+        btnApagarLuz.setBackground(new java.awt.Color(170, 219, 255));
+        btnApagarLuz.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons2/off.png"))); // NOI18N
+        btnApagarLuz.setBorderPainted(false);
         btnApagarLuz.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnApagarLuzActionPerformed(evt);
             }
         });
 
+        iconFoco.setBackground(new java.awt.Color(170, 219, 255));
         iconFoco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/light128.png"))); // NOI18N
+
+        jLabel2.setBackground(new java.awt.Color(170, 219, 255));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons2/Encender.png"))); // NOI18N
+
+        jLabel3.setBackground(new java.awt.Color(170, 219, 255));
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons2/Apagar.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnApagarLuz)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel3))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnEncenderLuz)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel2)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(iconFoco)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnEncenderLuz, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnApagarLuz, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(37, 37, 37)
-                .addComponent(iconFoco)
-                .addContainerGap(161, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
+                .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(btnEncenderLuz)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnApagarLuz))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnEncenderLuz)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(24, 24, 24)
+                                .addComponent(jLabel2)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnApagarLuz))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(27, 27, 27)
+                                .addComponent(jLabel3))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(47, 47, 47)
+                        .addGap(14, 14, 14)
                         .addComponent(iconFoco, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         pack();
@@ -141,6 +172,8 @@ public class LightView extends javax.swing.JInternalFrame implements Observer{
     private javax.swing.JButton btnEncenderLuz;
     private javax.swing.JLabel iconFoco;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
 
     @Override

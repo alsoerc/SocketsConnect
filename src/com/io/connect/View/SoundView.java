@@ -7,7 +7,7 @@ package com.io.connect.View;
 
 import com.io.connect.Cliente;
 import com.io.connect.Servidor;
-import icons2.FondoPanel;
+import icons2.FondoSonido;
 import java.util.Observable;
 import java.util.Observer;
 /**
@@ -20,7 +20,7 @@ public class SoundView extends javax.swing.JInternalFrame implements Observer{
     
     private static Servidor myServer;
     
-    FondoPanel fondo =  new FondoPanel();
+    private static FondoSonido fondo =  new FondoSonido();
     /**
      * Creates new form LightView
      */
@@ -66,6 +66,7 @@ public class SoundView extends javax.swing.JInternalFrame implements Observer{
 
         setClosable(true);
 
+        jLabel1.setBackground(new java.awt.Color(195, 242, 198));
         jLabel1.setForeground(new java.awt.Color(51, 102, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons2/sonido.png"))); // NOI18N
@@ -93,6 +94,7 @@ public class SoundView extends javax.swing.JInternalFrame implements Observer{
             }
         });
 
+        iconPresencia.setBackground(new java.awt.Color(195, 242, 198));
         iconPresencia.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         iconPresencia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/sound128.png"))); // NOI18N
 
@@ -106,6 +108,7 @@ public class SoundView extends javax.swing.JInternalFrame implements Observer{
             }
         });
 
+        iconAlert.setBackground(new java.awt.Color(195, 242, 198));
         iconAlert.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/alert128.png"))); // NOI18N
 
         jLabel3.setBackground(new java.awt.Color(195, 242, 198));

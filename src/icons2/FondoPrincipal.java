@@ -14,11 +14,11 @@ import javax.swing.JPanel;
  *
  * @author skylar
  */
-public class FondoPanel extends JPanel{
+public class FondoPrincipal extends JPanel{
     private Image image;
     @Override
     public void paint (Graphics g){
-        image = new ImageIcon(getClass().getResource("/icons2/fondoSonido.jpg")).getImage();
+        image = new ImageIcon(getClass().getResource("/icons2/fondoPrincipal.jpg")).getImage();
         g.drawImage(image, 0, 0,getWidth(), getHeight(), this);
         setOpaque(false);
         super.paint(g);

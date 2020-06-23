@@ -5,6 +5,7 @@
  */
 package com.io.connect.View;
 
+import icons2.FondoPrincipal;
 import java.awt.Color;
 
 /**
@@ -13,12 +14,13 @@ import java.awt.Color;
  */
 public class Launcher extends javax.swing.JFrame {
 
-     
+     private static FondoPrincipal fondo = new FondoPrincipal();
     
     /**
      * Creates new form Launcher
      */
     public Launcher() {
+        this.setContentPane(fondo);
         initComponents();
         this.setLocationRelativeTo(null);
         this.getContentPane().setBackground(Color.magenta);
@@ -46,14 +48,15 @@ public class Launcher extends javax.swing.JFrame {
 
         jDesktopPane1.setBackground(new java.awt.Color(255, 255, 255));
         jDesktopPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jDesktopPane1.setEnabled(false);
         jDesktopPane1.setMaximumSize(new java.awt.Dimension(600, 720));
         jDesktopPane1.setMinimumSize(new java.awt.Dimension(450, 300));
 
         btnMainSonido.setBackground(new java.awt.Color(60, 163, 42));
         btnMainSonido.setForeground(new java.awt.Color(0, 0, 0));
-        btnMainSonido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/sound32.png"))); // NOI18N
-        btnMainSonido.setText("Sonido");
+        btnMainSonido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons2/btoSonido.png"))); // NOI18N
         btnMainSonido.setToolTipText("Mostrar sensor de sonido");
+        btnMainSonido.setBorderPainted(false);
         btnMainSonido.setMaximumSize(new java.awt.Dimension(132, 48));
         btnMainSonido.setMinimumSize(new java.awt.Dimension(132, 48));
         btnMainSonido.addActionListener(new java.awt.event.ActionListener() {
@@ -64,9 +67,9 @@ public class Launcher extends javax.swing.JFrame {
 
         btnMainPresencia.setBackground(new java.awt.Color(51, 102, 255));
         btnMainPresencia.setForeground(new java.awt.Color(0, 0, 0));
-        btnMainPresencia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/presense32.png"))); // NOI18N
-        btnMainPresencia.setText("Presencia");
+        btnMainPresencia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons2/btoMovimiento.png"))); // NOI18N
         btnMainPresencia.setToolTipText("Mostrar sensor de presencia");
+        btnMainPresencia.setBorderPainted(false);
         btnMainPresencia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMainPresenciaActionPerformed(evt);
@@ -75,9 +78,9 @@ public class Launcher extends javax.swing.JFrame {
 
         btnMainLuz.setBackground(new java.awt.Color(248, 255, 123));
         btnMainLuz.setForeground(new java.awt.Color(0, 0, 0));
-        btnMainLuz.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/light32.png"))); // NOI18N
-        btnMainLuz.setText("Luz");
+        btnMainLuz.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons2/btoLuz.png"))); // NOI18N
         btnMainLuz.setToolTipText("Mostrar sensor de luz");
+        btnMainLuz.setBorderPainted(false);
         btnMainLuz.setMaximumSize(new java.awt.Dimension(132, 48));
         btnMainLuz.setMinimumSize(new java.awt.Dimension(132, 48));
         btnMainLuz.addActionListener(new java.awt.event.ActionListener() {
@@ -89,8 +92,7 @@ public class Launcher extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Droid Sans Mono", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(187, 0, 196));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/babies.png"))); // NOI18N
-        jLabel1.setText("BIENVENIDO A LOS CUNEROS ");
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons2/bienvenido.png"))); // NOI18N
 
         jDesktopPane1.setLayer(btnMainSonido, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(btnMainPresencia, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -102,33 +104,34 @@ public class Launcher extends javax.swing.JFrame {
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addComponent(btnMainSonido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(41, 41, 41)
+                .addComponent(btnMainSonido, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnMainPresencia)
-                .addGap(85, 85, 85))
+                .addComponent(btnMainPresencia, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(57, 57, 57))
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(btnMainLuz, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 463, Short.MAX_VALUE))
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 556, Short.MAX_VALUE))
+                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                        .addGap(185, 185, 185)
+                        .addComponent(btnMainLuz, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
-
-        jDesktopPane1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnMainLuz, btnMainPresencia, btnMainSonido});
-
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(jLabel1)
-                .addGap(32, 32, 32)
-                .addComponent(btnMainLuz, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(62, 62, 62)
+                .addGap(42, 42, 42)
+                .addComponent(btnMainLuz, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnMainPresencia)
-                    .addComponent(btnMainSonido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(107, Short.MAX_VALUE))
+                    .addComponent(btnMainSonido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnMainPresencia))
+                .addContainerGap(99, Short.MAX_VALUE))
         );
 
         getContentPane().add(jDesktopPane1, java.awt.BorderLayout.CENTER);
@@ -150,7 +153,7 @@ public class Launcher extends javax.swing.JFrame {
 
     private void btnMainSonidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMainSonidoActionPerformed
         SoundView sv = new SoundView();
-        
+
         jDesktopPane1.add(sv);
         sv.setVisible(true);
     }//GEN-LAST:event_btnMainSonidoActionPerformed
@@ -180,6 +183,7 @@ public class Launcher extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Launcher.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
