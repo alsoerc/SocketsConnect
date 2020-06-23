@@ -7,9 +7,9 @@ package com.io.connect.View;
 
 import com.io.connect.Cliente;
 import com.io.connect.Servidor;
+import icons2.FondoPanel;
 import java.util.Observable;
 import java.util.Observer;
-
 /**
  *
  * @author alsorc
@@ -19,10 +19,13 @@ public class SoundView extends javax.swing.JInternalFrame implements Observer{
     private final String iPSensorSonido = "25.36.68.101";
     
     private static Servidor myServer;
+    
+    FondoPanel fondo =  new FondoPanel();
     /**
      * Creates new form LightView
      */
     public SoundView() {
+        this.setContentPane(fondo);
         initComponents();
         loadStates();
         Servidor s = getServidor();
@@ -63,20 +66,23 @@ public class SoundView extends javax.swing.JInternalFrame implements Observer{
 
         jLabel1.setForeground(new java.awt.Color(51, 102, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/sound32.png"))); // NOI18N
-        jLabel1.setText("Módulo de Sonido");
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons2/sonido.png"))); // NOI18N
+        jLabel1.setMaximumSize(new java.awt.Dimension(160, 50));
+        jLabel1.setMinimumSize(new java.awt.Dimension(160, 50));
+        jLabel1.setPreferredSize(new java.awt.Dimension(200, 90));
 
+        btnEncender.setBackground(java.awt.Color.blue);
         btnEncender.setForeground(new java.awt.Color(0, 204, 0));
-        btnEncender.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/on.png"))); // NOI18N
-        btnEncender.setText("Encender");
+        btnEncender.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons2/on.png"))); // NOI18N
+        btnEncender.setBorderPainted(false);
         btnEncender.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEncenderActionPerformed(evt);
             }
         });
 
-        btnApagar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/off.png"))); // NOI18N
-        btnApagar.setText("Apagar");
+        btnApagar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons2/off.png"))); // NOI18N
+        btnApagar.setBorderPainted(false);
         btnApagar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnApagarActionPerformed(evt);
@@ -86,8 +92,8 @@ public class SoundView extends javax.swing.JInternalFrame implements Observer{
         iconPresencia.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         iconPresencia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/sound128.png"))); // NOI18N
 
-        btnAnalizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/search.png"))); // NOI18N
-        btnAnalizar.setText("Analizar");
+        btnAnalizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons2/analizar.png"))); // NOI18N
+        btnAnalizar.setBorderPainted(false);
         btnAnalizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAnalizarActionPerformed(evt);
@@ -101,49 +107,42 @@ public class SoundView extends javax.swing.JInternalFrame implements Observer{
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(64, 217, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(iconAlert)
-                    .addComponent(btnAnalizar, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnAnalizar)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(223, 223, 223))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(165, 165, 165)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnEncender, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnApagar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(27, 27, 27)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(96, 96, 96)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnApagar)
+                    .addComponent(btnEncender))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(iconPresencia)
-                .addGap(229, 229, 229))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(113, 113, 113))
         );
-
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnApagar, btnEncender});
-
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnEncender, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel1)
-                        .addGap(50, 50, 50)
-                        .addComponent(iconPresencia))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(62, 62, 62)
-                        .addComponent(btnEncender)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnApagar)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                .addComponent(iconAlert)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnApagar)
+                        .addGap(112, 112, 112))
+                    .addComponent(iconAlert, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(40, 40, 40)
                 .addComponent(btnAnalizar)
-                .addGap(27, 27, 27))
+                .addGap(51, 51, 51))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(168, 168, 168)
+                .addComponent(iconPresencia)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
-
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnApagar, btnEncender});
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -196,5 +195,5 @@ public class SoundView extends javax.swing.JInternalFrame implements Observer{
         }
     
     }
-    
+ 
 }
