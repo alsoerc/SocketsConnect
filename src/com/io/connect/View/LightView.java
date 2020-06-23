@@ -2,8 +2,10 @@
  * To change this license header, choose License Headers in Project Properties. * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.io.connect;
+package com.io.connect.View;
 
+import com.io.connect.Cliente;
+import com.io.connect.Servidor;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -15,7 +17,7 @@ import java.util.Observer;
  */
 public class LightView extends javax.swing.JInternalFrame implements Observer{
     
-    private final String iPSensorLuz = "192.168.1.73";
+    private final String iPSensorLuz = "25.36.68.101";
     
     private static Servidor myServer;
 

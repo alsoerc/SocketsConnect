@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.io.connect;
+package com.io.connect.View;
 
+import com.io.connect.Cliente;
+import com.io.connect.Servidor;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -12,23 +14,21 @@ import java.util.Observer;
  *
  * @author alsorc
  */
-public class PresenceView extends javax.swing.JInternalFrame  implements Observer{
+public class SoundView extends javax.swing.JInternalFrame implements Observer{
     
-    private final String iPSensorPrecensia = "192.168.1.77";
+    private final String iPSensorSonido = "25.36.68.101";
     
     private static Servidor myServer;
-
     /**
      * Creates new form LightView
      */
-    public PresenceView() {
+    public SoundView() {
         initComponents();
         loadStates();
         Servidor s = getServidor();
         s.addObserver(this);
         Thread t = new Thread(s);
         t.start();
-     
     }
     
     public static Servidor getServidor(){
@@ -36,7 +36,13 @@ public class PresenceView extends javax.swing.JInternalFrame  implements Observe
             myServer = new Servidor(5000);
         return myServer;
     }
+    
 
+    public void loadStates(){
+        this.iconPresencia.setEnabled(false);
+        this.iconAlert.setEnabled(false);
+        this.btnAnalizar.setEnabled(false);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -47,48 +53,48 @@ public class PresenceView extends javax.swing.JInternalFrame  implements Observe
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        btnEncenderPresencia = new javax.swing.JButton();
-        btnApagarPresencia = new javax.swing.JButton();
+        btnEncender = new javax.swing.JButton();
+        btnApagar = new javax.swing.JButton();
         iconPresencia = new javax.swing.JLabel();
-        btnAnalizarPresencia = new javax.swing.JButton();
-        iconAlertPresencia = new javax.swing.JLabel();
+        btnAnalizar = new javax.swing.JButton();
+        iconAlert = new javax.swing.JLabel();
 
         setClosable(true);
 
         jLabel1.setForeground(new java.awt.Color(51, 102, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/presense32.png"))); // NOI18N
-        jLabel1.setText("Módulo de Presencia");
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/sound32.png"))); // NOI18N
+        jLabel1.setText("Módulo de Sonido");
 
-        btnEncenderPresencia.setForeground(new java.awt.Color(0, 204, 0));
-        btnEncenderPresencia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/on.png"))); // NOI18N
-        btnEncenderPresencia.setText("Encender");
-        btnEncenderPresencia.addActionListener(new java.awt.event.ActionListener() {
+        btnEncender.setForeground(new java.awt.Color(0, 204, 0));
+        btnEncender.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/on.png"))); // NOI18N
+        btnEncender.setText("Encender");
+        btnEncender.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEncenderPresenciaActionPerformed(evt);
+                btnEncenderActionPerformed(evt);
             }
         });
 
-        btnApagarPresencia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/off.png"))); // NOI18N
-        btnApagarPresencia.setText("Apagar");
-        btnApagarPresencia.addActionListener(new java.awt.event.ActionListener() {
+        btnApagar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/off.png"))); // NOI18N
+        btnApagar.setText("Apagar");
+        btnApagar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnApagarPresenciaActionPerformed(evt);
+                btnApagarActionPerformed(evt);
             }
         });
 
         iconPresencia.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        iconPresencia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/presence128.png"))); // NOI18N
+        iconPresencia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/sound128.png"))); // NOI18N
 
-        btnAnalizarPresencia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/search.png"))); // NOI18N
-        btnAnalizarPresencia.setText("Analizar");
-        btnAnalizarPresencia.addActionListener(new java.awt.event.ActionListener() {
+        btnAnalizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/search.png"))); // NOI18N
+        btnAnalizar.setText("Analizar");
+        btnAnalizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAnalizarPresenciaActionPerformed(evt);
+                btnAnalizarActionPerformed(evt);
             }
         });
 
-        iconAlertPresencia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/alert128.png"))); // NOI18N
+        iconAlert.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/alert128.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -97,14 +103,14 @@ public class PresenceView extends javax.swing.JInternalFrame  implements Observe
             .addGroup(layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(iconAlertPresencia)
-                    .addComponent(btnAnalizarPresencia, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(iconAlert)
+                    .addComponent(btnAnalizar, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(223, 223, 223))
             .addGroup(layout.createSequentialGroup()
                 .addGap(165, 165, 165)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnEncenderPresencia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnApagarPresencia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnEncender, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnApagar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(27, 27, 27)
                 .addComponent(iconPresencia)
                 .addGap(229, 229, 229))
@@ -114,7 +120,7 @@ public class PresenceView extends javax.swing.JInternalFrame  implements Observe
                 .addContainerGap())
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnApagarPresencia, btnEncenderPresencia});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnApagar, btnEncender});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,53 +133,48 @@ public class PresenceView extends javax.swing.JInternalFrame  implements Observe
                         .addComponent(iconPresencia))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(62, 62, 62)
-                        .addComponent(btnEncenderPresencia)
+                        .addComponent(btnEncender)
                         .addGap(18, 18, 18)
-                        .addComponent(btnApagarPresencia)))
+                        .addComponent(btnApagar)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                .addComponent(iconAlertPresencia)
+                .addComponent(iconAlert)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnAnalizarPresencia)
+                .addComponent(btnAnalizar)
                 .addGap(27, 27, 27))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnApagarPresencia, btnEncenderPresencia});
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnApagar, btnEncender});
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnApagarPresenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarPresenciaActionPerformed
-        loadStates();
-        this.btnEncenderPresencia.setEnabled(true);
-    }//GEN-LAST:event_btnApagarPresenciaActionPerformed
-
-    private void btnEncenderPresenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEncenderPresenciaActionPerformed
-        this.iconPresencia.setEnabled(true);
-        this.btnAnalizarPresencia.setEnabled(true);
-        this.btnApagarPresencia.setEnabled(true);
+    private void btnApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarActionPerformed
+        this.iconPresencia.setEnabled(false);
+        this.iconAlert.setEnabled(false);
+        this.btnAnalizar.setEnabled(false);
         
-    }//GEN-LAST:event_btnEncenderPresenciaActionPerformed
+        
+    }//GEN-LAST:event_btnApagarActionPerformed
 
-    private void btnAnalizarPresenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnalizarPresenciaActionPerformed
+    private void btnEncenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEncenderActionPerformed
+        this.iconPresencia.setEnabled(true);
+        this.btnAnalizar.setEnabled(true);
+    }//GEN-LAST:event_btnEncenderActionPerformed
+
+    private void btnAnalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnalizarActionPerformed
         String mensaje = "ANALIZAR";
         System.out.println("----Conectando a cliente---");
-        Cliente c = new Cliente( 5000, mensaje.toUpperCase(), iPSensorPrecensia);
+        Cliente c = new Cliente( 5000, mensaje.toUpperCase(), iPSensorSonido);
         Thread t = new Thread(c);
         t.start();
-    }//GEN-LAST:event_btnAnalizarPresenciaActionPerformed
+    }//GEN-LAST:event_btnAnalizarActionPerformed
 
-    public void loadStates(){
-        this.iconPresencia.setEnabled(false);
-        this.iconAlertPresencia.setEnabled(false);
-        this.btnAnalizarPresencia.setEnabled(false);
-        this.btnApagarPresencia.setEnabled(false);
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAnalizarPresencia;
-    private javax.swing.JButton btnApagarPresencia;
-    private javax.swing.JButton btnEncenderPresencia;
-    private javax.swing.JLabel iconAlertPresencia;
+    private javax.swing.JButton btnAnalizar;
+    private javax.swing.JButton btnApagar;
+    private javax.swing.JButton btnEncender;
+    private javax.swing.JLabel iconAlert;
     private javax.swing.JLabel iconPresencia;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
@@ -183,15 +184,17 @@ public class PresenceView extends javax.swing.JInternalFrame  implements Observe
         System.out.println((String)o1);
         switch((String)o1){
             case "ALERT":
-                this.iconAlertPresencia.setEnabled(true);
-                System.out.println("PRESENCIA DETECTADA");
+                this.iconAlert.setEnabled(true);
+                System.out.println("SONIDO DETECTADO");
                 break;
             case "CALM":
-                  this.iconAlertPresencia.setEnabled(false);
+                  this.iconAlert.setEnabled(false);
                   System.out.println("NO PRESENCIA");
                   break;
             default:
                 System.err.println("Respuesta no válida " + (String)o1);
         }
+    
     }
+    
 }

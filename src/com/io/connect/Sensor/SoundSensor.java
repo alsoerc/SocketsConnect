@@ -3,18 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.io.connect;
+package com.io.connect.Sensor;
 
+import com.io.connect.Cliente;
+import com.io.connect.Servidor;
 import java.util.Observable;
 import java.util.Observer;
 
-public class LightSensor extends javax.swing.JFrame implements Observer {
+public class SoundSensor extends javax.swing.JFrame implements Observer {
     
-    String ipClienteLauncher = "192.168.1.70";
+    String ipClienteLauncher = "192.168.1.77";
     
-    public LightSensor() {
+    public SoundSensor() {
         initComponents();
-        this.setTitle("LOG LIGHT SENSOR");
+        this.setTitle("LOG SOUND SENSOR");
         Servidor s = new Servidor(5000);
         s.addObserver(this);
         Thread t = new Thread(s);
@@ -79,18 +81,14 @@ public class LightSensor extends javax.swing.JFrame implements Observer {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LightSensor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SoundSensor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LightSensor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SoundSensor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LightSensor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SoundSensor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LightSensor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SoundSensor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -99,7 +97,7 @@ public class LightSensor extends javax.swing.JFrame implements Observer {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new LightSensor().setVisible(true);
+                new SoundSensor().setVisible(true);
             }
         });
     }
@@ -112,7 +110,7 @@ public class LightSensor extends javax.swing.JFrame implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         this.txtTexto.append(("COMANDO @USUARIO: " + (String)arg).toUpperCase()+"\n");
-        this.txtTexto.append("RESPUESTA LIGHT SENSOR: " + evalueMessage((String) arg).toUpperCase()+"\n");
+        this.txtTexto.append("RESPUESTA SOUND SENSOR: " + evalueMessage((String) arg).toUpperCase()+"\n");
     }
     
       public String evalueMessage(String msg){
@@ -124,6 +122,13 @@ public class LightSensor extends javax.swing.JFrame implements Observer {
             case "OFF":
                 status = "APAGADO";
                 break;
+            case "ANALIZAR":
+                if(getRandomIntegerBetweenRange(0, 9) == 5){
+                    status = "ALERT";   
+                }else{
+                    status = "CALM";   
+                }
+                break;
             default:
                 status = "ACCIÓN NO DEFINIDA";
         }
@@ -132,7 +137,12 @@ public class LightSensor extends javax.swing.JFrame implements Observer {
         t.start();
         return status;
     }
- 
+      
+    public static int getRandomIntegerBetweenRange(int min, int max){
+        int x = (int)(Math.random()*((max-min)+1))+min;
+        return x;
+    }  
+      
       
     
 }

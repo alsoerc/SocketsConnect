@@ -3,16 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.io.connect;
+package com.io.connect.Sensor;
 
+import com.io.connect.Cliente;
+import com.io.connect.Servidor;
 import java.util.Observable;
 import java.util.Observer;
 
-public class SoundSensor extends javax.swing.JFrame implements Observer {
+public class PresenceSensor extends javax.swing.JFrame implements Observer {
     
-    String ipClienteLauncher = "192.168.1.77";
+    String ipClienteLauncher = "192.168.1.70";
     
-    public SoundSensor() {
+    public PresenceSensor() {
         initComponents();
         this.setTitle("LOG SOUND SENSOR");
         Servidor s = new Servidor(5000);
@@ -79,14 +81,18 @@ public class SoundSensor extends javax.swing.JFrame implements Observer {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SoundSensor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PresenceSensor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SoundSensor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PresenceSensor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SoundSensor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PresenceSensor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SoundSensor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PresenceSensor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -95,7 +101,7 @@ public class SoundSensor extends javax.swing.JFrame implements Observer {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new SoundSensor().setVisible(true);
+                new PresenceSensor().setVisible(true);
             }
         });
     }
