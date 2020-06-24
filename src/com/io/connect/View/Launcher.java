@@ -23,7 +23,7 @@ public class Launcher extends javax.swing.JFrame {
         this.setContentPane(fondo);
         initComponents();
         this.setLocationRelativeTo(null);
-        this.getContentPane().setBackground(Color.magenta);
+        //this.getContentPane().setBackground(Color.magenta);
         
     }
 
@@ -46,17 +46,19 @@ public class Launcher extends javax.swing.JFrame {
         setBackground(new java.awt.Color(255, 255, 255));
         setForeground(new java.awt.Color(255, 204, 51));
 
-        jDesktopPane1.setBackground(new java.awt.Color(255, 255, 255));
-        jDesktopPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jDesktopPane1.setBackground(java.awt.Color.white);
+        jDesktopPane1.setBorder(null);
         jDesktopPane1.setEnabled(false);
         jDesktopPane1.setMaximumSize(new java.awt.Dimension(600, 720));
         jDesktopPane1.setMinimumSize(new java.awt.Dimension(450, 300));
+        jDesktopPane1.setOpaque(false);
 
         btnMainSonido.setBackground(new java.awt.Color(60, 163, 42));
         btnMainSonido.setForeground(new java.awt.Color(0, 0, 0));
         btnMainSonido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons2/btoSonido.png"))); // NOI18N
         btnMainSonido.setToolTipText("Mostrar sensor de sonido");
         btnMainSonido.setBorderPainted(false);
+        btnMainSonido.setContentAreaFilled(false);
         btnMainSonido.setMaximumSize(new java.awt.Dimension(132, 48));
         btnMainSonido.setMinimumSize(new java.awt.Dimension(132, 48));
         btnMainSonido.addActionListener(new java.awt.event.ActionListener() {
@@ -70,6 +72,7 @@ public class Launcher extends javax.swing.JFrame {
         btnMainPresencia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons2/btoMovimiento.png"))); // NOI18N
         btnMainPresencia.setToolTipText("Mostrar sensor de presencia");
         btnMainPresencia.setBorderPainted(false);
+        btnMainPresencia.setContentAreaFilled(false);
         btnMainPresencia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMainPresenciaActionPerformed(evt);
@@ -81,6 +84,7 @@ public class Launcher extends javax.swing.JFrame {
         btnMainLuz.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons2/btoLuz.png"))); // NOI18N
         btnMainLuz.setToolTipText("Mostrar sensor de luz");
         btnMainLuz.setBorderPainted(false);
+        btnMainLuz.setContentAreaFilled(false);
         btnMainLuz.setMaximumSize(new java.awt.Dimension(132, 48));
         btnMainLuz.setMinimumSize(new java.awt.Dimension(132, 48));
         btnMainLuz.addActionListener(new java.awt.event.ActionListener() {
@@ -104,32 +108,32 @@ public class Launcher extends javax.swing.JFrame {
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                .addGap(41, 41, 41)
+                .addGap(56, 56, 56)
                 .addComponent(btnMainSonido, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnMainPresencia, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39))
+                .addGap(65, 65, 65))
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 523, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 614, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                .addGap(229, 229, 229)
                 .addComponent(btnMainLuz, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(180, 180, 180))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addGap(46, 46, 46)
                 .addComponent(jLabel1)
-                .addGap(42, 42, 42)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
                 .addComponent(btnMainLuz, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(38, 38, 38)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnMainSonido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnMainPresencia))
-                .addContainerGap(37, Short.MAX_VALUE))
+                    .addComponent(btnMainPresencia)
+                    .addComponent(btnMainSonido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(105, 105, 105))
         );
 
         getContentPane().add(jDesktopPane1, java.awt.BorderLayout.CENTER);
