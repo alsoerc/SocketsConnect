@@ -4,44 +4,70 @@
  */
 package com.io.connect.View;
 
-import com.io.connect.Cliente;
-import com.io.connect.Servidor;
+import com.io.connect.Messages;
+
+import com.io.connect.SocketConectorView;
 import icons2.FondoLuz;
-import java.util.Observable;
-import java.util.Observer;
-
-
+import java.io.IOException;
+import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JLabel;
 
 /**
  *
  * @author alsorc
  */
-public class LightView extends javax.swing.JInternalFrame implements Observer{
-    
-    private final String iPSensorLuz = "25.36.68.101";
-    
-    private static Servidor myServer;
-    
-    private static FondoLuz fondo = new FondoLuz();
+public class LightView extends javax.swing.JInternalFrame{
 
+    private static FondoLuz fondo = new FondoLuz();
+    SocketConectorView mySocket;
     /**
      * Creates new form LightView
      */
-    public LightView() {
+    public LightView() throws IOException {
+        this.mySocket = SocketConectorView.getSocketConector();
         this.setContentPane(fondo);
         initComponents();
-        loadStates();
-        Servidor serverLight = getServidor();
-        serverLight.addObserver(this);
-        Thread t = new Thread(serverLight);
-        t.start();
-        
-    }
-    
-      public static Servidor getServidor(){
-        if(myServer == null)
-            myServer = new Servidor(5000);
-        return myServer;
+        JLabel iconoFoco = this.iconFoco;
+        loadStates(); 
+
+        Thread task = new Thread() {
+            @Override
+            public void run() {
+                String msgBackFromSensor;
+                System.out.println("******LOG LIGH TVIEW********");
+                while (true) {
+                    
+                    try {
+                        msgBackFromSensor = mySocket.getInputData().readUTF();
+                        
+                        if(msgBackFromSensor != null|| msgBackFromSensor.equals("")){
+                            System.out.println(msgBackFromSensor);
+                        }
+                        
+                        System.out.println("response: " + msgBackFromSensor);
+                        switch (msgBackFromSensor) {
+                            case "LIGHT_SENSOR_ON":
+                                System.out.println("ENCENDIDO");
+                                btnApagarLuz.setEnabled(true);
+                                iconoFoco.setEnabled(true);
+                                break;
+                            case "LIGHT_SENSOR_OFF":
+                                System.out.println("APAGADO");
+                                iconoFoco.setEnabled(false);
+                                btnApagarLuz.setEnabled(false);
+                                break;
+                            default:
+                                System.err.println("Escuchando");                                
+                        }
+                    } catch (IOException ex) {
+                        Logger.getLogger(LightView.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+        };
+        task.start();
     }
 
     /**
@@ -149,20 +175,22 @@ public class LightView extends javax.swing.JInternalFrame implements Observer{
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnApagarLuzActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarLuzActionPerformed
-        loadStates();
+        try {
+          mySocket.sendMessage(Messages.LIGHT_OFF);
+        } catch (IOException ex) {
+            Logger.getLogger(LightView.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnApagarLuzActionPerformed
 
     private void btnEncenderLuzActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEncenderLuzActionPerformed
-        this.iconFoco.setEnabled(true);
-        this.btnApagarLuz.setEnabled(true);
-        String mensaje = "ON";
-        System.out.println("----Conectando a cliente---");
-        Cliente c = new Cliente( 5000, mensaje.toUpperCase(), iPSensorLuz);
-        Thread t = new Thread(c);
-        t.start();
+        try {
+            mySocket.sendMessage(Messages.LIGHT_ON);
+        } catch (IOException ex) {
+            Logger.getLogger(LightView.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnEncenderLuzActionPerformed
 
-       public void loadStates(){
+    public void loadStates() {
         this.iconFoco.setEnabled(false);
         this.btnApagarLuz.setEnabled(false);
     }
@@ -176,16 +204,6 @@ public class LightView extends javax.swing.JInternalFrame implements Observer{
     private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
 
-    @Override
-    public void update(Observable o, Object o1) {
-        switch((String)o1){
-            case "ENCENDIDO":
-                  this.iconFoco.setEnabled(true);
-                  System.out.println("ENCENDIDO");
-                  break;
-            default:
-                System.err.println("Respuesta no válida " + (String)o1);
-        }
+     
     
-    }
 }

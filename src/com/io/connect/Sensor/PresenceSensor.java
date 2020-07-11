@@ -5,24 +5,60 @@
  */
 package com.io.connect.Sensor;
 
-import com.io.connect.Cliente;
-import com.io.connect.Servidor;
-import java.util.Observable;
-import java.util.Observer;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JTextArea;
 
-public class PresenceSensor extends javax.swing.JFrame implements Observer {
-    
-    String ipClienteLauncher = "192.168.1.70";
+public class PresenceSensor extends javax.swing.JFrame  {
     
     public PresenceSensor() {
         initComponents();
-        this.setTitle("LOG SOUND SENSOR");
-        Servidor s = new Servidor(5000);
-        s.addObserver(this);
-        Thread t = new Thread(s);
-        t.start(); 
-    }
+        JTextArea txt = this.txtTexto;
+        final String SENSOR = "PRESENCE";
+        this.setTitle("LOG PRESENCE SENSOR");
+        Thread task = new Thread() {
+            @Override
+            public void run() {
+                System.out.println("******LOG PRESENCE SENSOR********");
+                while (true) {
+                    try {
+                        String msgBack = SocketConectorSensor.getSocketConector().getInputData().readUTF();
+                        String myMsg[] = msgBack.split(":");
 
+                        if (myMsg[0].equals("PRESENCE")) {
+                            switch (myMsg[1]) {
+                                case "ON":
+                                    System.out.println("-----ON----");
+                                    System.out.println(msgBack);
+                                    txt.append(msgBack + "\n");
+                                    SocketConectorSensor.getSocketConector().sendMessage(MessageResponse.PRESENCE_ON);
+                                    break;
+                                case "OFF":
+                                    System.out.println("----OFF----");
+                                    System.out.println(msgBack );
+                                    txt.append(msgBack + "\n");
+                                    SocketConectorSensor.getSocketConector().sendMessage(MessageResponse.PRESENCE_OFF);
+                                    break;
+                                case "ANALIZAR":
+                                    System.out.println("----ANALIZAR----");
+                                    txt.append(msgBack + "\n");
+                                    SocketConectorSensor.getSocketConector().sendStatus(SENSOR + "_" +  String.valueOf(getRandomIntegerBetweenRange(0,2)));
+                                default:
+                                    System.out.println("default");
+                                    
+                            }
+                        }
+                    } catch (IOException ex) {
+                        Logger.getLogger(PresenceSensor.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+        };
+        task.start();
+       
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -111,37 +147,8 @@ public class PresenceSensor extends javax.swing.JFrame implements Observer {
     private javax.swing.JTextArea txtTexto;
     // End of variables declaration//GEN-END:variables
 
-    @Override
-    public void update(Observable o, Object arg) {
-        this.txtTexto.append(("COMANDO @USUARIO: " + (String)arg).toUpperCase()+"\n");
-        this.txtTexto.append("RESPUESTA SOUND SENSOR: " + evalueMessage((String) arg).toUpperCase()+"\n");
-    }
     
-      public String evalueMessage(String msg){
-        String status="";
-        switch(msg){
-            case "ON":
-                status = "ENCENDIDO";
-                break;
-            case "OFF":
-                status = "APAGADO";
-                break;
-            case "ANALIZAR":
-                if(getRandomIntegerBetweenRange(0, 9) == 5){
-                    status = "ALERT";   
-                }else{
-                    status = "CALM";   
-                }
-                break;
-            default:
-                status = "ACCIÓN NO DEFINIDA";
-        }
-        Cliente c = new Cliente(5000, status, ipClienteLauncher);
-        Thread t = new Thread(c);
-        t.start();
-        return status;
-    }
-      
+    
     public static int getRandomIntegerBetweenRange(int min, int max){
         int x = (int)(Math.random()*((max-min)+1))+min;
         return x;

@@ -9,10 +9,11 @@
             <file>file:/D:/proyectosNetBeans/Youtube/sockets/Ejercicio_sockets_DDR_3/src/ejercicio_sockets_ddr_3/Cliente.java</file>
         </group>
         <group>
-            <file>file:/home/skylar/NetBeansProjects/SocketsConnect/src/com/io/connect/View/LightView.java</file>
-            <file>file:/home/skylar/NetBeansProjects/SocketsConnect/src/com/io/connect/View/SoundView.java</file>
-            <file>file:/home/skylar/NetBeansProjects/SocketsConnect/src/com/io/connect/View/Launcher.java</file>
-            <file>file:/home/skylar/NetBeansProjects/SocketsConnect/src/com/io/connect/View/PresenceView.java</file>
+            <file>file:/home/alsorc/Documents/UV/DesarrolloRed/SocketsRedesConnect/src/com/io/connect/View/PresenceView.java</file>
+            <file>file:/home/alsorc/Documents/UV/DesarrolloRed/SocketsRedesConnect/src/com/io/connect/SocketConector.java</file>
+            <file>file:/home/alsorc/Documents/UV/DesarrolloRed/SocketsRedesConnect/src/com/io/connect/Sensor/LightSensor.java</file>
+            <file>file:/home/alsorc/Documents/UV/DesarrolloRed/SocketsRedesConnect/src/com/io/connect/Sensor/PresenceSensor.java</file>
+            <file>file:/home/alsorc/Documents/UV/DesarrolloRed/SocketsRedesConnect/src/com/io/connect/Sensor/SocketConector.java</file>
         </group>
     </open-files>
 </project-private>

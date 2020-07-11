@@ -6,7 +6,9 @@
 package com.io.connect.View;
 
 import icons2.FondoPrincipal;
-import java.awt.Color;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -142,15 +144,23 @@ public class Launcher extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnMainLuzActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMainLuzActionPerformed
-        LightView lv = new LightView();
-        jDesktopPane1.add(lv);
-        lv.setVisible(true);
+         try {
+             LightView lv = new LightView();
+             jDesktopPane1.add(lv);
+             lv.setVisible(true);
+         } catch (IOException ex) {
+             Logger.getLogger(Launcher.class.getName()).log(Level.SEVERE, null, ex);
+         }
     }//GEN-LAST:event_btnMainLuzActionPerformed
 
     private void btnMainPresenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMainPresenciaActionPerformed
-        PresenceView pv = new PresenceView();
-        jDesktopPane1.add(pv);
-        pv.setVisible(true);
+         try {
+             PresenceView pv = new PresenceView();
+             jDesktopPane1.add(pv);
+             pv.setVisible(true);
+         } catch (IOException ex) {
+             Logger.getLogger(Launcher.class.getName()).log(Level.SEVERE, null, ex);
+         }
     }//GEN-LAST:event_btnMainPresenciaActionPerformed
 
     private void btnMainSonidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMainSonidoActionPerformed

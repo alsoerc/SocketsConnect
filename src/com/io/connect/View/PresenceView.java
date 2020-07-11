@@ -5,42 +5,75 @@
  */
 package com.io.connect.View;
 
-import com.io.connect.Cliente;
-import com.io.connect.Servidor;
+import com.io.connect.Messages;
+import com.io.connect.SocketConectorView;
 import icons2.FondoMovimiento;
-import java.util.Observable;
-import java.util.Observer;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JLabel;
 
 /**
  *
  * @author alsorc
  */
-public class PresenceView extends javax.swing.JInternalFrame  implements Observer{
-    
-    private final String iPSensorPrecensia = "25.36.68.101";
-    
-    private static Servidor myServer;
-    
-    private static FondoMovimiento fondo = new FondoMovimiento();
+public class PresenceView extends javax.swing.JInternalFrame {
 
+    private static FondoMovimiento fondo = new FondoMovimiento();
+    SocketConectorView mySocket;
     /**
      * Creates new form LightView
      */
-    public PresenceView() {
+    public PresenceView() throws IOException {
+        this.mySocket = new SocketConectorView();
         this.setContentPane(fondo);
         initComponents();
+        JLabel iconito = this.iconPresencia;
         loadStates();
-        Servidor s = getServidor();
-        s.addObserver(this);
-        Thread t = new Thread(s);
-        t.start();
-     
-    }
-    
-    public static Servidor getServidor(){
-        if(myServer == null)
-            myServer = new Servidor(5000);
-        return myServer;
+        Thread task = new Thread() {
+            @Override
+            public void run() {
+                String msgBackFromSensor;
+                System.out.println("******LOG LIGH TVIEW********");
+                while (true) {
+
+                    try {
+                        msgBackFromSensor = mySocket.getInputData().readUTF();
+                        System.out.println("response: " + msgBackFromSensor);
+                        switch (msgBackFromSensor) {
+                            case "PRESENCE_ON":
+                                System.out.println("ENCENDIDO");
+                                btnApagarPresencia.setEnabled(true);
+                                btnAnalizarPresencia.setEnabled(true);
+                                break;
+                            case "PRESENCE_OFF":
+                                System.out.println("APAGADO");
+                                iconito.setEnabled(false);
+                                btnApagarPresencia.setEnabled(false);
+                                break;
+                            case "PRESENCE_1":
+                                System.out.println("PRESENCE!");
+                                iconito.setEnabled(true);
+                                break;
+                            case "PRESENCE_0":
+                                System.out.println("NO PRESENCE");
+                                iconito.setEnabled(false);
+                                break;
+                            case "PRESENCE_2":
+                                System.out.println("NO PRESENCE");
+                                iconito.setEnabled(false);
+                                break;
+                            default:
+                                System.err.println("LISTENING");
+                        }
+                    } catch (IOException ex) {
+                        Logger.getLogger(PresenceView.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+        };
+        task.start();
+
     }
 
     /**
@@ -176,26 +209,30 @@ public class PresenceView extends javax.swing.JInternalFrame  implements Observe
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnApagarPresenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarPresenciaActionPerformed
-        loadStates();
-        this.btnEncenderPresencia.setEnabled(true);
+        try {
+            mySocket.sendMessage(Messages.PRESENCE_OFF);
+        } catch (IOException ex) {
+            Logger.getLogger(PresenceView.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnApagarPresenciaActionPerformed
 
     private void btnEncenderPresenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEncenderPresenciaActionPerformed
-        this.iconPresencia.setEnabled(true);
-        this.btnAnalizarPresencia.setEnabled(true);
-        this.btnApagarPresencia.setEnabled(true);
-        
+        try {
+            mySocket.sendMessage(Messages.PRESENCE_ON);
+        } catch (IOException ex) {
+            Logger.getLogger(PresenceView.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnEncenderPresenciaActionPerformed
 
     private void btnAnalizarPresenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnalizarPresenciaActionPerformed
-        String mensaje = "ANALIZAR";
-        System.out.println("----Conectando a cliente---");
-        Cliente c = new Cliente( 5000, mensaje.toUpperCase(), iPSensorPrecensia);
-        Thread t = new Thread(c);
-        t.start();
+        try {
+            SocketConectorView.getSocketConector().sendMessage(Messages.PRESENCE_ANALIZAR);
+        } catch (IOException ex) {
+            Logger.getLogger(PresenceView.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnAnalizarPresenciaActionPerformed
 
-    public void loadStates(){
+    public void loadStates() {
         this.iconPresencia.setEnabled(false);
         this.iconAlertPresencia.setEnabled(false);
         this.btnAnalizarPresencia.setEnabled(false);
@@ -213,20 +250,4 @@ public class PresenceView extends javax.swing.JInternalFrame  implements Observe
     private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
 
-    @Override
-    public void update(Observable o, Object o1) {
-        System.out.println((String)o1);
-        switch((String)o1){
-            case "ALERT":
-                this.iconAlertPresencia.setEnabled(true);
-                System.out.println("PRESENCIA DETECTADA");
-                break;
-            case "CALM":
-                  this.iconAlertPresencia.setEnabled(false);
-                  System.out.println("NO PRESENCIA");
-                  break;
-            default:
-                System.err.println("Respuesta no válida " + (String)o1);
-        }
-    }
 }
