@@ -20,7 +20,7 @@ public class SocketConectorView {
     public SocketConectorView() throws IOException {
         
         //IP de mi servidor
-        InetAddress ip = InetAddress.getByName("localhost");
+        InetAddress ip = InetAddress.getByName("192.168.0.108");
 
         // establish the connection with server port 5056 
         this.socket = new Socket(ip, 5056);

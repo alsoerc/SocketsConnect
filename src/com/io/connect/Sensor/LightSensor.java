@@ -19,8 +19,6 @@ public class LightSensor extends javax.swing.JFrame {
         initComponents();
         JTextArea txt = this.txtTexto;
         this.setTitle("LOG LIGHT SENSOR");
-
-
         Thread task = new Thread() {
             @Override
             public void run() {
@@ -30,8 +28,8 @@ public class LightSensor extends javax.swing.JFrame {
                         String msgBack = SocketConectorSensor.getSocketConector().getInputData().readUTF();
                         String myMsg[] = msgBack.split(":");
 
-                        if (myMsg[0].equals("LIGHT")) {
-                            switch (myMsg[1]) {
+                        if (myMsg[0].equals("DESKTOP") && myMsg[1].equals("LIGHT")) {
+                            switch (myMsg[2]) {
                                 case "ON":
                                     System.out.println("-----ON----");
                                     System.out.println(msgBack);
@@ -50,6 +48,28 @@ public class LightSensor extends javax.swing.JFrame {
                             }
 
                         }
+                        
+                        if(myMsg[0].equals("MOVIL") && myMsg[1].equals("LIGHT")){
+                            switch (myMsg[2]) {
+                                case "ON":
+                                    System.out.println("-----ON----");
+                                    System.out.println(msgBack);
+                                    txt.append(msgBack + "\n");
+                                    SocketConectorSensor.getSocketConector().sendMessage(MessageResponse.MOVIL_LIGHT_ON);
+                                    break;
+                                case "OFF":
+                                    System.out.println("----OFF----");
+                                    System.out.println(msgBack );
+                                    txt.append(msgBack + "\n");
+                                    SocketConectorSensor.getSocketConector().sendMessage(MessageResponse.MOVIL_LIGHT_OFF);
+                                    break;
+                                default:
+                                    System.out.println("default");
+                                    
+                            }
+                        }
+                        
+                        
                     } catch (IOException ex) {
                         Logger.getLogger(LightSensor.class.getName()).log(Level.SEVERE, null, ex);
                     }

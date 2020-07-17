@@ -9,7 +9,6 @@ import com.io.connect.Messages;
 import com.io.connect.SocketConectorView;
 import icons2.FondoLuz;
 import java.io.IOException;
-import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
@@ -46,20 +45,19 @@ public class LightView extends javax.swing.JInternalFrame{
                             System.out.println(msgBackFromSensor);
                         }
                         
-                        System.out.println("response: " + msgBackFromSensor);
                         switch (msgBackFromSensor) {
-                            case "LIGHT_SENSOR_ON":
+                            case "DESKTOP_LIGHT_SENSOR_ON":
                                 System.out.println("ENCENDIDO");
                                 btnApagarLuz.setEnabled(true);
                                 iconoFoco.setEnabled(true);
                                 break;
-                            case "LIGHT_SENSOR_OFF":
+                            case "DESKTOP_LIGHT_SENSOR_OFF":
                                 System.out.println("APAGADO");
                                 iconoFoco.setEnabled(false);
                                 btnApagarLuz.setEnabled(false);
                                 break;
                             default:
-                                System.err.println("Escuchando");                                
+                                System.err.println("LISTENING");                                
                         }
                     } catch (IOException ex) {
                         Logger.getLogger(LightView.class.getName()).log(Level.SEVERE, null, ex);

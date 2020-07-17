@@ -31,8 +31,8 @@ public class SoundSensor extends javax.swing.JFrame {
                         String msgBack = SocketConectorSensor.getSocketConector().getInputData().readUTF();
                         String myMsg[] = msgBack.split(":");
 
-                        if (myMsg[0].equals("SOUND")) {
-                            switch (myMsg[1]) {
+                        if (myMsg[0].equals("DESKTOP") && myMsg[1].equals("SOUND")) {
+                            switch (myMsg[2]) {
                                 case "ON":
                                     System.out.println("-----ON----");
                                     System.out.println(msgBack);
@@ -43,17 +43,43 @@ public class SoundSensor extends javax.swing.JFrame {
                                     System.out.println("----OFF----");
                                     System.out.println(msgBack );
                                     txt.append(msgBack + "\n");
-                                    SocketConectorSensor.getSocketConector().sendMessage(MessageResponse.PRESENCE_OFF);
+                                    SocketConectorSensor.getSocketConector().sendMessage(MessageResponse.SOUND_OFF);
                                     break;
                                 case "ANALIZAR":
                                     System.out.println("----ANALIZAR----");
                                     txt.append(msgBack + "\n");
-                                    SocketConectorSensor.getSocketConector().sendStatus(SENSOR + "_" +  String.valueOf(getRandomIntegerBetweenRange(0,2)));
+                                    SocketConectorSensor.getSocketConector().sendStatus("DESKTOP_" + SENSOR + "_" +  String.valueOf(getRandomIntegerBetweenRange(0,2)));
+                                    break;
                                 default:
-                                    System.out.println("default");
+                                    System.out.println("LISTENING");
                                     
                             }
                         }
+                        if(myMsg[0].equals("MOVIL") && myMsg[1].equals("SOUND")){
+                            switch (myMsg[2]) {
+                                case "ON":
+                                    System.out.println("-----ON----");
+                                    System.out.println(msgBack);
+                                    txt.append(msgBack + "\n");
+                                    SocketConectorSensor.getSocketConector().sendMessage(MessageResponse.MOVIL_SOUND_ON);
+                                    break;
+                                case "OFF":
+                                    System.out.println("----OFF----");
+                                    System.out.println(msgBack );
+                                    txt.append(msgBack + "\n");
+                                    SocketConectorSensor.getSocketConector().sendMessage(MessageResponse.MOVIL_SOUND_OFF);
+                                    break;
+                                case "ANALIZAR":
+                                    System.out.println("----ANALIZAR----");
+                                    txt.append(msgBack + "\n");
+                                    SocketConectorSensor.getSocketConector().sendStatus("MOVIL_" + SENSOR + "_" +  String.valueOf(getRandomIntegerBetweenRange(0,2)));
+                                    break;
+                                default:
+                                    System.out.println("LISTENING");
+                                    
+                            }
+                        }
+                        
                     } catch (IOException ex) {
                         Logger.getLogger(SoundSensor.class.getName()).log(Level.SEVERE, null, ex);
                     }

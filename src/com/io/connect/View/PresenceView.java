@@ -28,7 +28,7 @@ public class PresenceView extends javax.swing.JInternalFrame {
         this.mySocket = new SocketConectorView();
         this.setContentPane(fondo);
         initComponents();
-        JLabel iconito = this.iconPresencia;
+        JLabel iconito = this.iconAlertPresencia;
         loadStates();
         Thread task = new Thread() {
             @Override
@@ -41,25 +41,25 @@ public class PresenceView extends javax.swing.JInternalFrame {
                         msgBackFromSensor = mySocket.getInputData().readUTF();
                         System.out.println("response: " + msgBackFromSensor);
                         switch (msgBackFromSensor) {
-                            case "PRESENCE_ON":
+                            case "DESKTOP_PRESENCE_ON":
                                 System.out.println("ENCENDIDO");
                                 btnApagarPresencia.setEnabled(true);
                                 btnAnalizarPresencia.setEnabled(true);
                                 break;
-                            case "PRESENCE_OFF":
+                            case "DESKTOP_PRESENCE_OFF":
                                 System.out.println("APAGADO");
                                 iconito.setEnabled(false);
                                 btnApagarPresencia.setEnabled(false);
                                 break;
-                            case "PRESENCE_1":
+                            case "DESKTOP_PRESENCE_1":
                                 System.out.println("PRESENCE!");
                                 iconito.setEnabled(true);
                                 break;
-                            case "PRESENCE_0":
+                            case "DESKTOP_PRESENCE_0":
                                 System.out.println("NO PRESENCE");
                                 iconito.setEnabled(false);
                                 break;
-                            case "PRESENCE_2":
+                            case "DESKTOP_PRESENCE_2":
                                 System.out.println("NO PRESENCE");
                                 iconito.setEnabled(false);
                                 break;
@@ -88,7 +88,6 @@ public class PresenceView extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         btnEncenderPresencia = new javax.swing.JButton();
         btnApagarPresencia = new javax.swing.JButton();
-        iconPresencia = new javax.swing.JLabel();
         btnAnalizarPresencia = new javax.swing.JButton();
         iconAlertPresencia = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -121,10 +120,6 @@ public class PresenceView extends javax.swing.JInternalFrame {
             }
         });
 
-        iconPresencia.setBackground(new java.awt.Color(254, 216, 229));
-        iconPresencia.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        iconPresencia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/presence128.png"))); // NOI18N
-
         btnAnalizarPresencia.setBackground(new java.awt.Color(254, 216, 229));
         btnAnalizarPresencia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons2/analizar.png"))); // NOI18N
         btnAnalizarPresencia.setBorderPainted(false);
@@ -152,26 +147,23 @@ public class PresenceView extends javax.swing.JInternalFrame {
                 .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 646, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnApagarPresencia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 646, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnEncenderPresencia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(iconPresencia)
-                        .addGap(33, 33, 33))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(btnAnalizarPresencia, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnApagarPresencia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnEncenderPresencia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                         .addComponent(iconAlertPresencia)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(41, 41, 41))))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnApagarPresencia, btnEncenderPresencia});
@@ -188,18 +180,14 @@ public class PresenceView extends javax.swing.JInternalFrame {
                         .addComponent(btnApagarPresencia))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(46, 46, 46)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(iconAlertPresencia)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(70, 70, 70)
-                                .addComponent(jLabel3))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(iconPresencia)
-                                .addGap(25, 25, 25)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnAnalizarPresencia, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(iconAlertPresencia, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addComponent(jLabel3)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                .addComponent(btnAnalizarPresencia, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(31, Short.MAX_VALUE))
         );
 
@@ -233,7 +221,6 @@ public class PresenceView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnAnalizarPresenciaActionPerformed
 
     public void loadStates() {
-        this.iconPresencia.setEnabled(false);
         this.iconAlertPresencia.setEnabled(false);
         this.btnAnalizarPresencia.setEnabled(false);
         this.btnApagarPresencia.setEnabled(false);
@@ -244,7 +231,6 @@ public class PresenceView extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnApagarPresencia;
     private javax.swing.JButton btnEncenderPresencia;
     private javax.swing.JLabel iconAlertPresencia;
-    private javax.swing.JLabel iconPresencia;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

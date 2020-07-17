@@ -164,10 +164,14 @@ public class Launcher extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMainPresenciaActionPerformed
 
     private void btnMainSonidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMainSonidoActionPerformed
-        SoundView sv = new SoundView();
-
-        jDesktopPane1.add(sv);
-        sv.setVisible(true);
+         try {
+             SoundView sv = new SoundView();
+             
+             jDesktopPane1.add(sv);
+             sv.setVisible(true);
+         } catch (IOException ex) {
+             Logger.getLogger(Launcher.class.getName()).log(Level.SEVERE, null, ex);
+         }
     }//GEN-LAST:event_btnMainSonidoActionPerformed
     
     /**

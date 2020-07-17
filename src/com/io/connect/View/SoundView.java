@@ -20,13 +20,15 @@ import javax.swing.JLabel;
 public class SoundView extends javax.swing.JInternalFrame {
 
     private static FondoSonido fondo = new FondoSonido();
+    SocketConectorView mySocket;
 
     /**
      * Creates new form LightView
      */
-    public SoundView() {
+    public SoundView() throws IOException {
         this.setContentPane(fondo);
         initComponents();
+        this.mySocket = new SocketConectorView();
         JLabel iconito = this.iconAlert;
         loadStates();
         Thread task = new Thread() {
@@ -37,31 +39,31 @@ public class SoundView extends javax.swing.JInternalFrame {
                 while (true) {
 
                     try {
-                        msgBackFromSensor = SocketConectorView.getSocketConector().getInputData().readUTF();
+                        msgBackFromSensor = mySocket.getInputData().readUTF();
                          if(msgBackFromSensor != null|| msgBackFromSensor.equals("")){
                             System.out.println(msgBackFromSensor);
                         }
                         System.out.println("response: " + msgBackFromSensor);
                         switch (msgBackFromSensor) {
-                            case "SOUND_ON":
+                            case "DESKTOP_SOUND_ON":
                                 System.out.println("ENCENDIDO");
                                 btnApagar.setEnabled(true);
                                 btnAnalizar.setEnabled(true);
                                 break;
-                            case "SOUND_OFF":
+                            case "DESKTOP_SOUND_OFF":
                                 System.out.println("APAGADO");
                                 iconito.setEnabled(false);
                                 btnApagar.setEnabled(false);
                                 break;
-                            case "SOUND_1":
+                            case "DESKTOP_SOUND_1":
                                 System.out.println("SOUND!");
                                 iconito.setEnabled(true);
                                 break;
-                            case "SOUND_0":
+                            case "DESKTOP_SOUND_0":
                                 System.out.println("NO SOUND");
                                 iconito.setEnabled(false);
                                 break;
-                            case "SOUND_2":
+                            case "DESKTOP_SOUND_2":
                                 System.out.println("NO SOUND");
                                 iconito.setEnabled(false);
                                 break;
@@ -212,7 +214,7 @@ public class SoundView extends javax.swing.JInternalFrame {
 
     private void btnApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarActionPerformed
         try {
-            SocketConectorView.getSocketConector().sendMessage(Messages.SOUND_OFF);
+            mySocket.sendMessage(Messages.SOUND_OFF);
         } catch (IOException ex) {
             Logger.getLogger(SoundView.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -221,7 +223,7 @@ public class SoundView extends javax.swing.JInternalFrame {
     private void btnEncenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEncenderActionPerformed
 
         try {
-            SocketConectorView.getSocketConector().sendMessage(Messages.SOUND_ON);
+            mySocket.sendMessage(Messages.SOUND_ON);
         } catch (IOException ex) {
             Logger.getLogger(SoundView.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -229,7 +231,7 @@ public class SoundView extends javax.swing.JInternalFrame {
 
     private void btnAnalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnalizarActionPerformed
         try {
-            SocketConectorView.getSocketConector().sendMessage(Messages.SOUND_ANALIZAR);
+            mySocket.sendMessage(Messages.SOUND_ANALIZAR);
         } catch (IOException ex) {
             Logger.getLogger(SoundView.class.getName()).log(Level.SEVERE, null, ex);
         }
