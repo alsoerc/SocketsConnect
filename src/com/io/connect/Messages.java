@@ -3,7 +3,7 @@ package com.io.connect;
 /**
  *
  * @author alsorc
- * Mensaje que la vista envía hacia el sensor
+ * Posibles mensajes que las vistan envían hacia el sensor
  */
 public enum Messages {
     

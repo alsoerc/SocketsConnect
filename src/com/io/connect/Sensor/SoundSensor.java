@@ -21,7 +21,6 @@ public class SoundSensor extends javax.swing.JFrame {
         JTextArea txt = this.txtTexto;
         this.setTitle("LOG SOUND SENSOR");
         final String SENSOR = "SOUND";
-        this.setTitle("LOG PRESENCE SENSOR");
         Thread task = new Thread() {
             @Override
             public void run() {

@@ -40,7 +40,7 @@ public class SoundView extends javax.swing.JInternalFrame {
 
                     try {
                         msgBackFromSensor = mySocket.getInputData().readUTF();
-                         if(msgBackFromSensor != null|| msgBackFromSensor.equals("")){
+                        if (msgBackFromSensor != null || msgBackFromSensor.equals("")) {
                             System.out.println(msgBackFromSensor);
                         }
                         System.out.println("response: " + msgBackFromSensor);
